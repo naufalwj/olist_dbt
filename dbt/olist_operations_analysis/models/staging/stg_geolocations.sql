@@ -14,10 +14,10 @@ LEFT JOIN
 
 SELECT
     zip_code,
-    state as short_state
+    state as state,
     LOWER(
         {{ portuguese_letter_translator('city') }}
-    ) AS clean_city,
-    {{ portuguese_letter_translator('state_name') }} as clean_state
+    ) AS city,
+    {{ portuguese_letter_translator('state_name') }} as full_state
 FROM
     raw_geolocations
