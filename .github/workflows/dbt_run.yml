@@ -1,0 +1,36 @@
+name: dbt production run
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:   # lets you manually trigger it from GitHub UI too
+
+jobs:
+  run-dbt:
+    runs-on: ubuntu-latest
+    environment: databricks
+
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_HTTP: ${{ secrets.DATABRICKS_HTTP }}
+      DATABRICKS_ACCESS_TOKEN: ${{ secrets.DATABRICKS_ACCESS_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dbt
+        run: pip install dbt-databricks
+
+      - name: Verify dbt connection
+        working-directory: dbt/olist_operations_analysis
+        run: dbt debug --profiles-dir .
+
+      - name: Run dbt build
+        working-directory: dbt/olist_operations_analysis
+        run: dbt build --profiles-dir .

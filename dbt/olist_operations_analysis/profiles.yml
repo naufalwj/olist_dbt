@@ -1,0 +1,11 @@
+olist_operations_analysis:
+  outputs:
+    dev:
+      catalog: olist_dbt
+      host: "{{ env_var('DATABRICKS_HOST')}}"
+      http_path: "{{ env_var('DATABRICKS_HTTP')}}"
+      schema: default
+      threads: 4
+      token: "{{ env_var('DATABRICKS_ACCESS_TOKEN')}}"
+      type: databricks
+  target: dev

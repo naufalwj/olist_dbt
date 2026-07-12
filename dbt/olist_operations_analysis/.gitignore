@@ -1,6 +1,6 @@
 # Secret environment variables and profiles
 .env
-profiles.yml
+vars.yml
 
 # dbt artifacts
 target/
