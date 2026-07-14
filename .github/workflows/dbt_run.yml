@@ -28,13 +28,13 @@ jobs:
         run: pip install dbt-databricks
       
       - name: Install dbt packages
-        working-directory: dbt/olist_operations_analysis
+        working-directory: dbt
         run: dbt deps --profiles-dir .
 
       - name: Verify dbt connection
-        working-directory: dbt/olist_operations_analysis
+        working-directory: dbt
         run: dbt debug --profiles-dir .
 
       - name: Run dbt build
-        working-directory: dbt/olist_operations_analysis
+        working-directory: dbt
         run: dbt build --profiles-dir .

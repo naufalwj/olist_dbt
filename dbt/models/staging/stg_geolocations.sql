@@ -13,6 +13,7 @@ LEFT JOIN
 )
 
 SELECT
+    DISTINCT
     zip_code,
     state as state,
     LOWER(
